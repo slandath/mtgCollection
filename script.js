@@ -4,7 +4,9 @@ function getCard() {
     let buttfuck = document.getElementById('hocus').value;
     let mouthfuck = document.getElementById('pocus').value; 
 
-    fetch(`https://api.scryfall.com/cards/named?exact=${buttfuck}&set=${mouthfuck}`)
+    fetch(`https://api.scryfall.com/cards/named?exact=${buttfuck}&set=${mouthfuck}`, {
+        method: 'GET',
+    })
         .then((res) => res.json())
         .then((data) => {
             document.getElementById('search-result').innerHTML = "Card Found!"
@@ -23,7 +25,9 @@ function getCard() {
 // Get All Cards
 
 function getPGCards() {
-    fetch(`http://localhost:3000/api/v1/cards`)
+    fetch(`http://localhost:3000/api/v1/cards`, {
+        method: 'GET',
+    })
     .then((res) => res.json())
     .then((data) => {
         let output = '<h3 class="list-group-item list-group-item-dark ">Cards</h3>';
@@ -48,11 +52,11 @@ function insertCard() {
      fetch (`http://localhost:3000/api/v1/cards`, {
         method: 'POST',
         body: JSON.stringify({
-            id: "6a058e68-70af-4a64-859c-c881e5578368"
+            "id" : `${pussy}`
         }),
-      /*  headers: {
-            "Content-type": "application/json; charset=UTF-8"
-        } */
+        headers: {
+            "Content-type": "application/json",
+        }
     })
         .then(res => res.json())
         .then(data => console.log(data));
