@@ -1,72 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MTG Collection</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-</head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  </head>
 
-<body>
+  <body>
     <div class="container-fluid p-3 bg-dark bg-gradient text-white text-center">
-        <div class="row">
-            <div class="col-12">
-                <h1>My Magic: The Gathering Collection</h1>
-            </div>
+      <div class="row">
+        <div class="col-12">
+          <h1>My Magic: The Gathering Collection</h1>
         </div>
+      </div>
     </div>
 
     <div class="container-fluid mt-4">
-        <div class="row">
-            <div class="col-xs">
-                <form>
-                    <div class="input-group">
-                        <span class="input-group-text">Scryfall</span>
-                        <input type="text" aria-label="MTG Card Name" class="form-control" id="hocus" placeholder="Card Name" aria-label="Name of MTG card" aria-describedby="button-addon2">
-                        <input type="text" aria-label="Set" class="form-control" id="pocus" placeholder="Set Abbreviation" aria-label="Set of MTG card" aria-describedby="button-addon2">
-                        <button class="btn btn-primary" type="button" id="submit" onclick="getCard()">Search</button>
-                    </div>
-                </form>
+      <div class="row">
+        <div class="col-xs">
+          <form>
+            <div class="input-group">
+              <span class="input-group-text">Scryfall</span>
+              <input
+                type="text"
+                aria-label="MTG Card Name"
+                class="form-control"
+                id="hocus"
+                placeholder="Card Name"
+                aria-label="Name of MTG card"
+                aria-describedby="button-addon2"
+              />
+              <input
+                type="text"
+                aria-label="Set"
+                class="form-control"
+                id="pocus"
+                placeholder="Set Abbreviation"
+                aria-label="Set of MTG card"
+                aria-describedby="button-addon2"
+              />
+              <button
+                class="btn btn-primary"
+                type="button"
+                id="submit"
+                onclick="getCard()"
+              >
+                Search
+              </button>
             </div>
-                <div class="row mt-3">
-                    <div class="col-xs">
-                        <div class="card text-center bg-dark card text-white card border-dark mb-3 mx-auto" style="width: 15rem;">
-                            <h3 id="search-result"></h3>
-                            <img src="https://crystal-cdn1.crystalcommerce.com/photos/6648060/mtg-cardback.jpeg" class="card-img-top" id="scryfall-pic">
-                            <div class="card-body">
-                                <h5 class="card-title" id="scryfall-name"></h5>
-                                <p class="card-text" id="scryfall-set"></p>
-                                <p class="card-text" id="scryfall-price"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </form>
         </div>
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs">
-                <form>
-                    <div class="input-group">
-                        <span class="input-group-text">Add</span>
-                        <input type="text" aria-label="Set" class="form-control" id="trouble" aria-label="Set of MTG card" aria-describedby="button-addon2">
-                        <button class="btn btn-success" type="button" id="submit" onclick="insertCard()">Add to Collection</button>
-                    </div>
-                    <button class="btn btn-secondary mt-3" type="button" id="submit" onclick="getPGCards()">View Collection</button>
-                </form>
+        <div class="row mt-3">
+          <div class="col-xs">
+            <div
+              class="card text-center bg-dark card text-white card border-dark mb-3 mx-auto"
+              style="width: 15rem"
+            >
+              <h3 id="search-result"></h3>
+              <img
+                src="https://crystal-cdn1.crystalcommerce.com/photos/6648060/mtg-cardback.jpeg"
+                class="card-img-top"
+                id="scryfall-pic"
+              />
+              <div class="card-body">
+                <h5 class="card-title" id="scryfall-name"></h5>
+                <p class="card-text" id="scryfall-set"></p>
+                <p class="card-text" id="scryfall-price"></p>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <div class="container-fluid">
-        <div class="row mt-4">
-            <ul class="list-group" id="output-list"></ul>
+      <div class="row">
+        <div class="col-xs">
+          <form>
+            <div class="input-group">
+              <span class="input-group-text">Add</span>
+              <input
+                type="text"
+                aria-label="Set"
+                class="form-control"
+                id="trouble"
+                aria-label="Set of MTG card"
+                aria-describedby="button-addon2"
+              />
+              <button
+                class="btn btn-success"
+                type="button"
+                id="submit"
+                onclick="insertCard()"
+              >
+                Add to Collection
+              </button>
+            </div>
+            <button
+              class="btn btn-secondary mt-3"
+              type="button"
+              id="submit"
+              onclick="getPGCards()"
+            >
+              View Collection
+            </button>
+          </form>
         </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row mt-4">
+        <ul class="list-group" id="output-list"></ul>
+      </div>
     </div>
 
     <script src="/script.js"></script>
-</body>
-
+  </body>
 </html>
