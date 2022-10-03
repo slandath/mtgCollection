@@ -38,7 +38,20 @@ function getPGCards() {
         '<h3 class="list-group-item list-group-item-dark ">Cards</h3>';
       data.forEach(function (post) {
         output += `
-            <li class="list-group-item">${post.name}</li>
+        <div class="list-group d-flex flex-row">
+        <li class="list-group-item w-100">
+            ID: ${post.id}
+          </li>
+          <li class="list-group-item w-100">
+            Name: ${post.name}
+          </li>
+          <li class="list-group-item w-100">
+            Quantity: ${post.quantity}
+          </li>
+          <li class="list-group-item w-100">
+            Price (USD): $${post.usd}
+          </li>
+        </div>
             `;
       });
       document.getElementById("output-list").innerHTML = output;
@@ -59,15 +72,16 @@ function insertCard() {
     .then((data) => {
       let cardName = data.name;
       let priceUsd = data.prices.usd;
-      
+      let quantity = 1
       fetch(`http://localhost:3000/api/v1/cards`, {
         method: "POST",
         body: JSON.stringify({
           id: scryId,
           name: cardName,
-          usd: priceUsd
+          usd: priceUsd,
+          quantity: quantity,
         }),
-        headers: {
+        headers: { 
           "Content-type": "application/json",
         },
       }).then((res) => console.log(res));
