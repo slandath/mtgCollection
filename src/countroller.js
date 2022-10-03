@@ -32,14 +32,28 @@ const addCard = (req, res) => {
 
       pool.query(queries.updateCardQuantity, [quantity, id], (error) => {
         if (error) throw error;
-        res.status(200).send("Card Quantity Updated!");
-        console.log("Card Quantity Updated");
+        pool.query(queries.findCardId, [id], (error, results) => {
+          if (error) throw error;
+          if (results.rowCount == 0) {
+            res.status(400).send(`Card ID: ${id} not found!`);
+          } else {
+            res.status(200).send(results.rows);
+            console.log("Card Quantity Updated");
+          }
+        });
       });
     } else {
       pool.query(queries.addCard, [id, name, usd, qty], (error) => {
         if (error) throw error;
-        res.status(201).send("Card Added!");
-        console.log("Card Added");
+        pool.query(queries.findCardId, [id], (error, results) => {
+          if (error) throw error;
+          if (results.rowCount == 0) {
+            res.status(400).send(`Card ID: ${id} not found!`);
+          } else {
+            res.status(201).send(results.rows);
+            console.log("Card Added");
+          }
+        });
       });
     }
   });
@@ -72,14 +86,18 @@ const updateCard = (req, res) => {
     if (results.rowCount == 0)
       res.status(400).send(`Card ID: ${id} not found!`);
     else {
-      pool.query(
-        queries.updateCard,
-        [name, usd, quantity, id],
-        (error) => {
+      pool.query(queries.updateCard, [name, usd, quantity, id], (error) => {
+        if (error) throw error;
+        pool.query(queries.findCardId, [id], (error, results) => {
           if (error) throw error;
-          res.status(200).send("Card Updated");
-        }
-      );
+          if (results.rowCount == 0) {
+            res.status(400).send(`Card ID: ${id} not found!`);
+          } else {
+            res.status(200).send(results.rows);
+            console.log("Card Updated");
+          }
+        });
+      });
     }
   });
 };
@@ -94,16 +112,20 @@ const patchCard = (req, res) => {
     if (error) throw error;
     if (results.rowCount == 0)
       res.status(400).send(`Card ID: ${id} not found!`);
-      else {
-        pool.query(
-          queries.patchCard,
-          [name, usd, quantity, id],
-          (error) => {
-            if (error) throw error;
-            res.status(200).send("Card Updated");
+    else {
+      pool.query(queries.patchCard, [name, usd, quantity, id], (error) => {
+        if (error) throw error;
+        pool.query(queries.findCardId, [id], (error, results) => {
+          if (error) throw error;
+          if (results.rowCount == 0) {
+            res.status(400).send(`Card ID: ${id} not found!`);
+          } else {
+            res.status(200).send(results.rows);
+            console.log("Card Updated");
           }
-        );
-      }
+        });
+      });
+    }
   });
 };
 
