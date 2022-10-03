@@ -34,7 +34,7 @@ const removeCard = (req, res) => {
 
     pool.query(queries.removeCard, [id], (error, results) => {
         if (error) throw error;
-        res.status(200).send("Card removed successfully!");
+        res.status(200).send("Card(s) removed successfully!");
     });
 };
 
