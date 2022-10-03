@@ -72,7 +72,7 @@ function insertCard() {
     .then((data) => {
       let cardName = data.name;
       let priceUsd = data.prices.usd;
-      let quantity = 1
+      let quantity = 1;
       fetch(`http://localhost:3000/api/v1/cards`, {
         method: "POST",
         body: JSON.stringify({
@@ -81,7 +81,7 @@ function insertCard() {
           usd: priceUsd,
           quantity: quantity,
         }),
-        headers: { 
+        headers: {
           "Content-type": "application/json",
         },
       }).then((res) => console.log(res));
@@ -91,23 +91,31 @@ function insertCard() {
     });
 }
 
-// Update Card
-
-/*
-
-fetch(`https://api.scryfall.com/cards/named?exact=${buttfuck}&set=${mouthfuck}`)
-        .then((res) => res.json())
-        .then((data) => {
-            document.getElementById('search-result').innerHTML = "Card Found!"
-            document.getElementById('scryfall-pic').src = data.image_uris.border_crop
-            document.getElementById('scryfall-name').innerHTML = data.name
-            document.getElementById('scryfall-set').innerHTML = data.set_name
-            document.getElementById('scryfall-price').innerHTML = "$" + data.prices.usd
-            document.getElementById('trouble').value = data.id;
+function updateAllPrices() {
+  fetch(`http://localhost:3000/api/v1/cards`, {
+    method: "GET",
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      data.forEach((card) => {
+        fetch(`https://api.scryfall.com/cards/${card.id}`, {
+          method: "GET",
         })
-        .catch((error) => {
-            console.log(error)
-            document.getElementById('search-result').innerHTML = "Card Not Found!";
-        }); 
-
-        */
+          .then((res) => res.json())
+          .then((scryData) => {
+            fetch(`http://localhost:3000/api/v1/cards/${card.id}`, {
+              method: "PATCH",
+              body: JSON.stringify({
+                usd: scryData.prices.usd,
+              }),
+              headers: {
+                "Content-type": "application/json",
+              },
+            }).then(() => {
+              getPGCards()
+            });
+          });
+      });
+    });
+    window.alert("All card prices have been updated");
+}
