@@ -18,9 +18,11 @@ const findCard = (req, res) => {
 };
 
 const addCard = (req, res) => {
-    const { id } = req.body;
+    const id = req.body.id;
+    const name = req.body.name;
+    const usd = req.body.usd;
 
-    pool.query(queries.addCard, [id], (error, results) => {
+    pool.query(queries.addCard, [id, name, usd], (error, results) => {
         if (error) throw error;
         res.status(201).send("Card Added!");
         console.log("Added");

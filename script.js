@@ -51,22 +51,30 @@ function getPGCards() {
 // Add Card
 
 function insertCard() {
-  let pussy = document.getElementById("trouble").value;
-  fetch(`http://localhost:3000/api/v1/cards`, {
-    method: "POST",
-    body: JSON.stringify({
-      id: `${pussy}`,
-    }),
-    headers: {
-      "Content-type": "application/json",
-    },
+  let scryId = document.getElementById("trouble").value;
+  fetch(`https://api.scryfall.com/cards/${scryId}`, {
+    method: "GET",
   })
     .then((res) => res.json())
-    .then((data) => console.log(data));
-  let vag = JSON.stringify({
-    id: `${pussy}`,
-  });
-  console.log(vag);
+    .then((data) => {
+      let cardName = data.name;
+      let priceUsd = data.prices.usd;
+      
+      fetch(`http://localhost:3000/api/v1/cards`, {
+        method: "POST",
+        body: JSON.stringify({
+          id: scryId,
+          name: cardName,
+          usd: priceUsd
+        }),
+        headers: {
+          "Content-type": "application/json",
+        },
+      }).then((res) => console.log(res));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
 // Update Card
