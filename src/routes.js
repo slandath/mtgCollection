@@ -3,11 +3,12 @@ const countroller = require("./countroller");
 
 const router = Router();
 
-router.get("/", countroller.getCards);
-router.post("/", countroller.addCard);
-router.get("/:name", countroller.findCard);
-router.put("/", countroller.updateCard);
-router.delete("/:id", countroller.removeCard);
-router.patch("/:id", countroller.patchCard);
+router.get("/cards", countroller.getCards);
+router.post("/cards", countroller.addCard);
+router.get("/cards/:name", countroller.findCard);
+router.put("/cards/", countroller.updateCard);
+router.delete("/cards/:id", countroller.removeCard);
+router.patch("/cards/:id", countroller.patchCard);
+router.get("/prices", countroller.updatePrices)
 
 module.exports = router;

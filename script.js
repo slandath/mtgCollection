@@ -91,31 +91,3 @@ function insertCard() {
     });
 }
 
-function updateAllPrices() {
-  fetch(`http://localhost:3000/api/v1/cards`, {
-    method: "GET",
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      data.forEach((card) => {
-        fetch(`https://api.scryfall.com/cards/${card.id}`, {
-          method: "GET",
-        })
-          .then((res) => res.json())
-          .then((scryData) => {
-            fetch(`http://localhost:3000/api/v1/cards/${card.id}`, {
-              method: "PATCH",
-              body: JSON.stringify({
-                usd: scryData.prices.usd,
-              }),
-              headers: {
-                "Content-type": "application/json",
-              },
-            }).then(() => {
-              getPGCards()
-            });
-          });
-      });
-    });
-    window.alert("All card prices have been updated");
-}

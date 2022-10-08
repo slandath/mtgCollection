@@ -27,6 +27,6 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.use("/api/v1/cards", cardRoutes);
+app.use("/api/v1", cardRoutes);
 
 app.listen(port, () => console.log(`app is listening on port ${port}`));
