@@ -1,14 +1,14 @@
 const { Router } = require("express");
-const countroller = require("./countroller");
+const controller = require("./controller");
 
 const router = Router();
 
-router.get("/cards", countroller.getCards);
-router.post("/cards", countroller.addCard);
-router.get("/cards/:name", countroller.findCard);
-router.put("/cards/", countroller.updateCard);
-router.delete("/cards/:id", countroller.removeCard);
-router.patch("/cards/:id", countroller.patchCard);
-router.get("/prices", countroller.updatePrices)
+router.get("/cards", controller.getCards);
+router.post("/cards", controller.addCard);
+router.get("/cards/:name", controller.findCard);
+router.put("/cards/", controller.updateCard);
+router.delete("/cards/:id", controller.removeCard);
+router.patch("/cards/:id", controller.patchCard);
+router.get("/prices", controller.updatePrices)
 
 module.exports = router;
