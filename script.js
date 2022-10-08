@@ -21,8 +21,8 @@ function getCard() {
       document.getElementById("trouble").value = data.id;
     })
     .catch((error) => {
-      console.log(error);
       document.getElementById("search-result").innerHTML = "Card Not Found!";
+      throw error
     });
 }
 
@@ -57,7 +57,7 @@ function getPGCards() {
       document.getElementById("output-list").innerHTML = output;
     })
     .catch((error) => {
-      console.log(error);
+      throw error
     });
 }
 
@@ -84,10 +84,10 @@ function insertCard() {
         headers: {
           "Content-type": "application/json",
         },
-      }).then((res) => console.log(res));
+      })
     })
     .catch((error) => {
-      console.log(error);
+      throw error
     });
 }
 

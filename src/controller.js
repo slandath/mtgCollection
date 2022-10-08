@@ -39,7 +39,6 @@ const addCard = (req, res) => {
             res.status(400).send(`Card ID: ${id} not found!`);
           } else {
             res.status(200).send(results.rows);
-            console.log("Card Quantity Updated");
           }
         });
       });
@@ -52,7 +51,6 @@ const addCard = (req, res) => {
             res.status(400).send(`Card ID: ${id} not found!`);
           } else {
             res.status(201).send(results.rows);
-            console.log("Card Added");
           }
         });
       });
@@ -95,7 +93,6 @@ const updateCard = (req, res) => {
             res.status(400).send(`Card ID: ${id} not found!`);
           } else {
             res.status(200).send(results.rows);
-            console.log("Card Updated");
           }
         });
       });
@@ -122,7 +119,6 @@ const patchCard = (req, res) => {
             res.status(400).send(`Card ID: ${id} not found!`);
           } else {
             res.status(200).send(results.rows);
-            console.log("Card Updated");
           }
         });
       });
