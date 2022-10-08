@@ -1,5 +1,6 @@
 const pool = require("../db");
 const queries = require("./queries");
+const scripts = require("./functions");
 
 const getCards = (req, res) => {
   pool.query(queries.getCards, (error, results) => {
@@ -129,6 +130,11 @@ const patchCard = (req, res) => {
   });
 };
 
+const updatePrices = async (req, res) => {
+  let message = await scripts.updateAllPrices();
+  res.status(200).send(message);
+};
+
 module.exports = {
   getCards,
   findCard,
@@ -136,4 +142,5 @@ module.exports = {
   removeCard,
   updateCard,
   patchCard,
+  updatePrices,
 };

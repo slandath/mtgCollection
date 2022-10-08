@@ -4,7 +4,7 @@ const pool = new Pool({
     user: "postgres",
     password: "Password1!",
     database: "mtg",
-    host: "localhost",
+    host: "mtg-cloud.cnwrks7c6kq7.us-east-1.rds.amazonaws.com",
     port: 5432
 
 });
